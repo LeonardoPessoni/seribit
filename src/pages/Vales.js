@@ -52,13 +52,13 @@ const Vales = () => {
         <table className='table'>
             <thead>
                 <tr>
-                    <th>Data</th>
-                    <th>Nome do Cliente</th>
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                    <th>Valor</th>
-                    <th>Excluir</th>
-                    <th>Imprimir</th>
+                  <th>Data</th>
+                  <th>Nome do Cliente</th>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Valor</th>
+                  <th>Excluir</th>
+                  <th>Imprimir</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,9 +73,11 @@ const Vales = () => {
                           <td>{vale.quantity}</td>
                           <td>R$ {vale.total}</td>
                           <td className='button-cell'>
-                              <button onClick={() => deleteVale(vale.voucherId)}>Excluir</button>
+                            <button onClick={() => deleteVale(vale.voucherId)}>Excluir</button>
                           </td>
-                          <td></td>
+                          <td className='button-cell'>
+                            <Link to={`/visualizarVale/${vale.voucherId}`}><button>Visualizar</button></Link>
+                          </td>
                       </tr>
                   );
               })}

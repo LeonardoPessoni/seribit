@@ -15,6 +15,15 @@ async function getClientes() {
     }
 };
 
+async function getClientesID({ id }) {
+    try {
+        const response = await clienteAPI.get(`/clients/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Deu Errado!");
+    }
+};
+
 async function getFuncionarios() {
     try {
         const response = await clienteAPI.get("/employees");
@@ -33,13 +42,31 @@ async function getProducts() {
     }
 }
 
-async function getVales() {
+async function getProductsId({ id }) {
     try {
-        const response = await clienteAPI.get("/vouchers");
+        const response = await clienteAPI.get(`/products/${id}`);
         return response.data;
     } catch (error) {
         console.error("Deu Errado!");
     }
 }
 
-export { getClientes, getFuncionarios, getProducts, getVales };
+async function getVales() {
+    try {
+        const response = await clienteAPI.get(`/vouchers`);
+        return response.data;
+    } catch (error) {
+        console.error("Deu Errado!");
+    }
+}
+
+async function getValesId({ id }) {
+    try {
+        const response = await clienteAPI.get(`/vouchers/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Deu Errado!");
+    }
+}
+
+export { getClientes, getClientesID, getFuncionarios, getProducts, getVales, getValesId, getProductsId };

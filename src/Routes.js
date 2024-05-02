@@ -13,6 +13,7 @@ import CadastroVale from "./pages/CadastroVale";
 import EditProduct from "./pages/EditProduct";
 import EditClient from "./pages/EditClient";
 import EditFunc from "./pages/EditFunc";
+import Print from "./pages/Print";
 
 const routes = () => {
   return (
@@ -32,6 +33,7 @@ const routes = () => {
             <Route path="/editClient/:id" element={<EditClient />} />
             <Route path="/editFuncionario/:id" element={<EditFunc />} />
             <Route path="/editProduto/:id" element={<EditProduct />} />
+            <Route path="/visualizarVale/:id" element={<Print />} />
 
             <Route path="/cadastroCliente" element={<Cadastro />} />
             <Route path="/cadastroFunc" element={<CadastroFunc />} />
