@@ -1,7 +1,6 @@
 import PrintStyle from "../style/PrintStyle"
-
 import React, { useState, useEffect } from "react";
-import { clienteAPI, getClientesID, getProductsId, getValesId } from "../model/ClienteModel";
+import { getClientesID, getProductsId, getValesId } from "../model/Model";
 import gerarPDF, { Margin } from 'react-to-pdf';
 import { useParams } from "react-router-dom";
 
@@ -10,7 +9,24 @@ const Print = () => {
     const { id } = useParams();
     const [vales, setVales] = useState([]);
     const [produtos, setProdutos] = useState([]);
-    const [clientes, setClientes] = useState([]);
+    const [clientes, setClientes] = useState({
+        address: {
+            cep: '',
+            complement: '',     
+            neighborhood: '',
+            number: '',
+            state: '',
+            street: '',
+        },
+        cpfCnpj: '',
+        email: '',
+        name: '',
+        phone: {
+            ddd: '',
+            phone: ''
+        }
+
+    });
     
     useEffect(() => {
         async function fetchVales() {
@@ -114,7 +130,7 @@ const Print = () => {
                             </div>
                             <div className="divisao">
                                 <h5>Endereço</h5>
-                                <p></p>
+                                <p>{clientes.address.street}, {clientes.address.number} - {clientes.address.neighborhood}   CEP: {clientes.address.cep}</p>
                             </div>
                             <div className="divisao">
                                 <h5>Assinatura:</h5>
@@ -130,7 +146,7 @@ const Print = () => {
                             </div> 
                             <div className="divisao">
                                 <h5>Contato(s):</h5>
-                                <p></p>
+                                <p>({clientes.phone.ddd}) {clientes.phone.phone}</p>
                             </div>
                             <br />
                             <div className="divisao" id="space">
@@ -176,7 +192,7 @@ const Print = () => {
                             </div>
                             <div className="divisao">
                                 <h5>Endereço</h5>
-                                <p></p>
+                                <p>{clientes.address.street}, {clientes.address.number} - {clientes.address.neighborhood}   CEP: {clientes.address.cep}</p>
                             </div>
                             <div className="divisao">
                                 <h5>Assinatura:</h5>
@@ -192,7 +208,7 @@ const Print = () => {
                             </div> 
                             <div className="divisao">
                                 <h5>Contato(s):</h5>
-                                <p></p>
+                                <p>({clientes.phone.ddd}) {clientes.phone.phone}</p>
                             </div>
                             <br />
                             <div className="divisao" id="space">

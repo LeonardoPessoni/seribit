@@ -3,7 +3,7 @@ import EditClientStyle from "../style/EditClientStyle";
 import axios from "axios";
 import Url from "../config/Config";
 import { Link } from "react-router-dom";
-import { getClientes } from "../model/ClienteModel";
+import { getClientes } from "../model/Model";
 
 const CadastroProduto = () => {
     const [name, setName] = useState("");

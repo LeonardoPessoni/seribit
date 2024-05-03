@@ -8,14 +8,6 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -36,7 +28,7 @@ function Login() {
                                 label: "Usuário",
                                 type: "text",
                                 value: username,
-                                onChange: handleUsernameChange,
+                                onChange: (e) => setUsername(e.target.value),
                                 placeholder: "Digite seu usuário",
                                 maxLength: 45
                             }}
@@ -49,7 +41,7 @@ function Login() {
                                 label: "Senha",
                                 type: "password",
                                 value: password,
-                                onChange: handlePasswordChange,
+                                onChange: (e) => setPassword(e.target.value),
                                 placeholder: "Digite sua senha",
                                 maxLength: 45
                             }}

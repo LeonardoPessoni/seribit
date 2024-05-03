@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import EditClientStyle from '../style/EditClientStyle';
-
 import axios from 'axios';
 import Url from '../config/Config';
 import { Link } from 'react-router-dom';
@@ -17,50 +16,7 @@ function Cadastro() {
     const [complement, setComplement] = useState('');
     const [ddd, setDDD] = useState('');
     const [phone, setPhone] = useState('');
-
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-    };
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const handleCpfCnpjChange = (event) => {
-        setCpfCnpj(event.target.value);
-    };
-
-    const handleStreetChange = (event) => {
-        setStreet(event.target.value);
-    };
-
-    const handleNumberChange = (event) => {
-        setNumber(event.target.value);
-    };
-
-    const handleNeighborhoodChange = (event) => {
-        setNeighborhood(event.target.value);
-    };
-
-    const handleStateChange = (event) => {
-        setState(event.target.value);
-    };
-
-    const handleCepChange = (event) => {
-        setCep(event.target.value);
-    };
-
-    const handleComplementChange = (event) => {
-        setComplement(event.target.value);
-    };
-
-    const handleDddChange = (event) => {
-        setDDD(event.target.value);
-    };
-
-    const handlePhoneChange = (event) => {
-        setPhone(event.target.value);
-    };
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -100,7 +56,7 @@ function Cadastro() {
                     <input className='input-name'
                         type="text"
                         name={name}
-                        onChange={handleNameChange}
+                        onChange={(e) => setName(e.target.value)}
                         placeholder="Digite seu nome"
                     />
                 </label>
@@ -111,7 +67,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={email}
-                            onChange={handleEmailChange}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder='Digite seu email'
                         />
                     </label>
@@ -120,7 +76,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={cpfCnpj}
-                            onChange={handleCpfCnpjChange}
+                            onChange={(e) => setCpfCnpj(e.target.value)}
                             placeholder='Digite seu CPF ou CNPJ'
                         />
                     </label>
@@ -132,7 +88,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={ddd}
-                            onChange={handleDddChange}
+                            onChange={e => setDDD(e.target.value)}
                             placeholder='Digite o DDD'
                         />
                     </label>
@@ -141,7 +97,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={phone}
-                            onChange={handlePhoneChange}
+                            onChange={e => setPhone(e.target.value)}
                             placeholder='Digite o telefone'
                         />
                     </label>
@@ -153,7 +109,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={cep}
-                            onChange={handleCepChange}
+                            onChange={e => setCep(e.target.value)}
                             placeholder='Digite o CEP'
                         />
                     </label>
@@ -162,7 +118,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={state}
-                            onChange={handleStateChange}
+                            onChange={e => setState(e.target.value)}
                             placeholder='Digite o estado'
                         />
                     </label>
@@ -174,7 +130,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={neighborhood}
-                            onChange={handleNeighborhoodChange}
+                            onChange={e => setNeighborhood(e.target.value)}
                             placeholder='Digite o bairro'
                         />
                     </label>
@@ -183,7 +139,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={street}
-                            onChange={handleStreetChange}
+                            onChange={e => setStreet(e.target.value)}
                             placeholder='Digite o endereço'
                         />
                     </label>
@@ -195,7 +151,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name="address"
-                            onChange={handleNumberChange}
+                            onChange={e => setNumber(e.target.value)}
                             placeholder='Digite o número'
                         />
                     </label>
@@ -204,7 +160,7 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={complement}
-                            onChange={handleComplementChange}
+                            onChange={e => setComplement(e.target.value)}
                             placeholder='Digite o complemento'
                         />
                     </label>

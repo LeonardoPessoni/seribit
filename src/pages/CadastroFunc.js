@@ -24,67 +24,6 @@ function CadastroFunc() {
     const [cep, setCep] = useState('');
     const [complement, setComplement] = useState('');
 
-
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-    };
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const handleCpfChange = (event) => {
-        setCpf(event.target.value);
-    };
-
-    const handleUserChange = (event) => {
-        setUser(event.target.value);
-    };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleConfirmPasswordChange = (event) => {
-        setConfirmPassword(event.target.value);
-    };
-
-    const handleSalaryChange = (event) => {
-        setSalary(event.target.value);
-    };
-
-    const handleStreetChange = (event) => {
-        setStreet(event.target.value);
-    };
-
-    const handleNumberChange = (event) => {
-        setNumber(event.target.value);
-    };
-
-    const handleNeighborhoodChange = (event) => {
-        setNeighborhood(event.target.value);
-    };
-
-    const handleStateChange = (event) => {
-        setState(event.target.value);
-    };
-
-    const handleCepChange = (event) => {
-        setCep(event.target.value);
-    };
-
-    const handleComplementChange = (event) => {
-        setComplement(event.target.value);
-    };
-
-    const handleDddChange = (event) => {
-        setDDD(event.target.value);
-    };
-
-    const handlePhoneChange = (event) => {
-        setPhone(event.target.value);
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (password === confirmPassword) {
@@ -132,7 +71,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={name}
-                            onChange={handleNameChange}
+                            onChange={(e) => setName(e.target.value)}
                             placeholder="Digite seu nome"
                         />
                     </label>
@@ -141,7 +80,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={email}
-                            onChange={handleEmailChange}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder='Digite seu email'
                         />
                     </label>
@@ -153,7 +92,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={cpf}
-                            onChange={handleCpfChange}
+                            onChange={(e) => setCpf(e.target.value)}
                             placeholder='Digite seu CPF'
                         />
                     </label>
@@ -162,7 +101,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={salary}
-                            onChange={handleSalaryChange}
+                            onChange={(e) => setSalary(e.target.value)}
                             placeholder='Digite o salário'
                         />
                     </label>
@@ -173,7 +112,7 @@ function CadastroFunc() {
                     <input className='input-name'
                         type="text"
                         name={user}
-                        onChange={handleUserChange}
+                        onChange={(e) => setUser(e.target.value)}
                         placeholder='Digite seu usuário'
                     />
                 </label>
@@ -184,7 +123,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="password"
                             name={password}
-                            onChange={handlePasswordChange}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder='Digite sua senha'
                         />
                     </label>
@@ -193,7 +132,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="password"
                             name={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder='Confirme sua senha'
                         />
                     </label>
@@ -205,7 +144,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={ddd}
-                            onChange={handleDddChange}
+                            onChange={(e) => setDDD(e.target.value)}
                             placeholder='Digite o DDD'
                             maxLength={2}
                         />
@@ -215,7 +154,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={phone}
-                            onChange={handlePhoneChange}
+                            onChange={(e) => setPhone(e.target.value)}
                             placeholder='Digite o telefone'
                         />
                     </label>
@@ -227,7 +166,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={cep}
-                            onChange={handleCepChange}
+                            onChange={(e) => setCep(e.target.value)}
                             placeholder='Digite o CEP'
                         />
                     </label>
@@ -236,7 +175,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={state}
-                            onChange={handleStateChange}
+                            onChange={(e) => setState(e.target.value)}
                             placeholder='Digite o estado'
                             maxLength={2}
                         />
@@ -249,7 +188,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={neighborhood}
-                            onChange={handleNeighborhoodChange}
+                            onChange={(e) => setNeighborhood(e.target.value)}
                             placeholder='Digite o bairro'
                         />
                     </label>
@@ -258,7 +197,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={street}
-                            onChange={handleStreetChange}
+                            onChange={(e) => setStreet(e.target.value)}
                             placeholder='Digite o endereço'
                         />
                     </label>
@@ -270,7 +209,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name="address"
-                            onChange={handleNumberChange}
+                            onChange={(e) => setNumber(e.target.value)}
                             placeholder='Digite o número'
                         />
                     </label>
@@ -279,7 +218,7 @@ function CadastroFunc() {
                         <input className='input'
                             type="text"
                             name={complement}
-                            onChange={handleComplementChange}
+                            onChange={(e) => setComplement(e.target.value)}
                             placeholder='Digite o complemento'
                         />
                     </label>

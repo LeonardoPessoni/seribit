@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts, clienteAPI } from "../model/ClienteModel";
+import { getProducts, clienteAPI } from "../model/Model";
 import ClientesStyle from '../style/ClientesStyle';
 
 const Produtos = () => {

@@ -9,7 +9,9 @@ const PrintStyle = createGlobalStyle`
     #page {
         display: flex;
         flex-direction: column;
-        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
     }
 
     .pontilhado {
@@ -42,7 +44,13 @@ const PrintStyle = createGlobalStyle`
         flex: 1;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
+        background-color: #fff;
+        margin-top: 20px;
+        padding: 20px;
+        min-width: 70%;
+        border-radius: 20px;
     }
 
     .borda {
@@ -91,13 +99,26 @@ const PrintStyle = createGlobalStyle`
     }
 
     .print-button {
-        width: 300px;
-        height: 50px;
-        font-size: 20px;
-        border-radius: 10px;
-        border: none;
-        color: black;
+        font-weight: 500;
+        font-size: 24px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        opacity: 0.6;
+        transition: 360ms;
         cursor: pointer;
+        border: none;
+        margin-top: 16px;
+        color: #fff;
+        background-color: transparent;
+        border: 1px solid #ccc;
+    }
+
+    .print-button:hover {
+        opacity: 1;
+        background-color: #873CFF;
+        border: 1px solid #873CFF;
+        box-shadow: 0px 0px 8px #873CFF;
+        transform: scale(1.1);
     }
 `
 

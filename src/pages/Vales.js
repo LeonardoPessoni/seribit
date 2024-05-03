@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ClientesStyle from '../style/ClientesStyle';
 import { Link } from "react-router-dom";
-import { getVales, clienteAPI, getProducts, getClientes } from "../model/ClienteModel";
+import { getVales, clienteAPI, getProducts, getClientes } from "../model/Model";
 
 const Vales = () => {
 

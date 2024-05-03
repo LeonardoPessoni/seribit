@@ -1,11 +1,7 @@
 import React from 'react'
-
 import { Link } from 'react-router-dom';
-
 import ClientesStyle from '../style/ClientesStyle'
-
-import { getFuncionarios, clienteAPI } from "../model/ClienteModel";
-
+import { getFuncionarios, clienteAPI } from "../model/Model";
 import { useState, useEffect } from "react";
 
 const Usuarios = () => {

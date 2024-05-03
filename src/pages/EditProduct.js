@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom/dist";
-import { clienteAPI } from "../model/ClienteModel";
+import { clienteAPI } from "../model/Model";
 import EditClientStyle from "../style/EditClientStyle";
 import { Link } from 'react-router-dom/dist';
 
