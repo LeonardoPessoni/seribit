@@ -3,6 +3,8 @@ import LoginStyle from '../style/LoginStyle';
 import Logo from '../images/Vector.png';
 import Input from '../components/Input';
 import postUser from '../model/LoginModel';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -10,10 +12,41 @@ function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        postUser(username, password, setUsername, setPassword);
-
+    
+        if (!username || !password) {
+            toast.info('Por favor, preencha todos os campos!', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
+            return;
+        };
+    
+        try {
+            const loginSuccessful = postUser(username, password, setUsername, setPassword);
+            
+            if (!loginSuccessful) {
+                toast.error('Usuário ou senha incorretos!', {
+                    position: "top-right",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
+                });
+            }
+        } catch (error) {
+            console.error('Ocorreu um erro ao fazer login:', error);
+        }
     };
+    
 
     return ( 
         <div className='login'>

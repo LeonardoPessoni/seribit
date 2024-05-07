@@ -3,6 +3,8 @@ import EditClientStyle from '../style/EditClientStyle';
 import axios from 'axios';
 import Url from '../config/Config';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cadastro() {
     const [name, setName] = useState('');
@@ -16,13 +18,41 @@ function Cadastro() {
     const [complement, setComplement] = useState('');
     const [ddd, setDDD] = useState('');
     const [phone, setPhone] = useState('');
-    
+
+    const handleCepChange = async (event) => {
+        const cepValue = event.target.value
+
+        setCep(cepValue);
+
+        if (cepValue.length === 8) { 
+            try {
+                const response = await axios.get(`https://viacep.com.br/ws/${cepValue}/json/`);
+                if (!response.data.erro) {
+                    setStreet(response.data.logradouro);
+                    setNeighborhood(response.data.bairro);
+                    setState(response.data.uf);
+                }
+            } catch (error) {
+                console.error('Erro ao obter endereço:', error);
+                toast.error('Erro ao obter endereço. Por favor, tente novamente.', {
+                    position: "top-right",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
+                });
+            }
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
         try {
-            const response = await axios.post(`${Url}/clients`, {
+            await axios.post(`${Url}/clients`, {
                 name: name,
                 email: email,
                 cpfCnpj: cpfCnpj,
@@ -36,13 +66,20 @@ function Cadastro() {
                 phone: phone
             });
 
-            console.log('Cadastro realizado com sucesso!', response.data);
-
             window.location.href = '/clientes';
         } catch (error) {
             console.error('Erro ao cadastrar:', error);
+            toast.error('Erro ao cadastrar. Por favor, tente novamente.', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
         }
-        
     };
 
     return ( 
@@ -58,6 +95,8 @@ function Cadastro() {
                         name={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Digite seu nome"
+                        maxLength={50}
+                        required
                     />
                 </label>
 
@@ -69,6 +108,8 @@ function Cadastro() {
                             name={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder='Digite seu email'
+                            maxLength={50}
+                            required
                         />
                     </label>
                     <label>
@@ -78,6 +119,8 @@ function Cadastro() {
                             name={cpfCnpj}
                             onChange={(e) => setCpfCnpj(e.target.value)}
                             placeholder='Digite seu CPF ou CNPJ'
+                            maxLength={14}
+                            required
                         />
                     </label>
                 </div>
@@ -90,6 +133,8 @@ function Cadastro() {
                             name={ddd}
                             onChange={e => setDDD(e.target.value)}
                             placeholder='Digite o DDD'
+                            maxLength={2}
+                            required
                         />
                     </label>
                     <label>
@@ -99,6 +144,8 @@ function Cadastro() {
                             name={phone}
                             onChange={e => setPhone(e.target.value)}
                             placeholder='Digite o telefone'
+                            maxLength={9}
+                            required
                         />
                     </label>
                 </div>
@@ -109,8 +156,10 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={cep}
-                            onChange={e => setCep(e.target.value)}
+                            onChange={handleCepChange}
                             placeholder='Digite o CEP'
+                            maxLength={8}
+                            required
                         />
                     </label>
                     <label>
@@ -118,8 +167,11 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={state}
+                            value={state}
                             onChange={e => setState(e.target.value)}
                             placeholder='Digite o estado'
+                            maxLength={2}
+                            required
                         />
                     </label>
                 </div>
@@ -130,8 +182,11 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={neighborhood}
+                            value={neighborhood}
                             onChange={e => setNeighborhood(e.target.value)}
                             placeholder='Digite o bairro'
+                            maxLength={30}
+                            required
                         />
                     </label>
                     <label>
@@ -139,8 +194,11 @@ function Cadastro() {
                         <input className='input'
                             type="text"
                             name={street}
+                            value={street}
                             onChange={e => setStreet(e.target.value)}
                             placeholder='Digite o endereço'
+                            maxLength={30}
+                            required
                         />
                     </label>
                 </div>
@@ -153,6 +211,8 @@ function Cadastro() {
                             name="address"
                             onChange={e => setNumber(e.target.value)}
                             placeholder='Digite o número'
+                            maxLength={10}
+                            required
                         />
                     </label>
                     <label>
@@ -162,6 +222,7 @@ function Cadastro() {
                             name={complement}
                             onChange={e => setComplement(e.target.value)}
                             placeholder='Digite o complemento'
+                            maxLength={30}
                         />
                     </label>
                 </div>

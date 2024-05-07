@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import ClientesStyle from '../style/ClientesStyle'
 import { getClientes, clienteAPI } from "../model/Model";
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Clientes = () => {
   const [posts, setPosts] = useState([]);
@@ -14,13 +16,24 @@ const Clientes = () => {
   async function fetchClientes() {
     const clientesAPI = await getClientes();
     setPosts(clientesAPI);
-
-    console.log(clientesAPI);
   }
 
   async function deleteCliente(id) {
-    await clienteAPI.delete(`/clients/${id}`)
-    fetchClientes()
+    try {
+      await clienteAPI.delete(`/clients/${id}`)
+      fetchClientes()
+    } catch (error) {
+      toast.error('Não é possível excluir este cliente, pois ele está vinculado a um produto ou vale.', {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      });
+    }
   }
 
   return (
@@ -42,8 +55,8 @@ const Clientes = () => {
               <th>Nome</th>
               <th>E-mail</th>
               <th>CPF/CNPJ</th>
-              <th>Excluir</th>
               <th>Editar</th>
+              <th>Excluir</th>
             </tr>
           </thead>
           <tbody>
@@ -55,11 +68,11 @@ const Clientes = () => {
                   <td>{post.cpfCnpj}</td>
 
                   <td className='button-cell'>
-                    <button onClick={() => deleteCliente(post.clientId)}>Excluir</button>
+                    <Link to={`/editClient/${post.clientId}`}><button>Editar</button></Link>
                   </td>
-                  
+
                   <td className='button-cell'>
-                  <Link to={`/editClient/${post.clientId}`}><button>Editar</button></Link>
+                    <button onClick={() => deleteCliente(post.clientId)}>Excluir</button>
                   </td>
                 </tr>
               );

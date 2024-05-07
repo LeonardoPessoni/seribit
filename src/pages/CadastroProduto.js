@@ -4,6 +4,8 @@ import axios from "axios";
 import Url from "../config/Config";
 import { Link } from "react-router-dom";
 import { getClientes } from "../model/Model";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CadastroProduto = () => {
     const [name, setName] = useState("");
@@ -24,17 +26,31 @@ const CadastroProduto = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const formattedPrice = price.replace(",", ".");
+        try {
+            const formattedPrice = price.replace(",", ".");
 
-        const response = await axios.post(`${Url}/products`, {
-            name: name,
-            price: formattedPrice,
-            clientId: clientId, 
-        });
+            const response = await axios.post(`${Url}/products`, {
+                name: name,
+                price: formattedPrice,
+                clientId: clientId, 
+            });
 
-        console.log(response);
+            console.log(response);
 
-        window.location.href = "/produtos";
+            window.location.href = "/produtos";
+        } catch (error) {
+            console.error('Erro ao cadastrar:', error);
+            toast.error('Erro ao cadastrar. Por favor, tente novamente.', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
+        }
     };
 
     return (
@@ -52,6 +68,8 @@ const CadastroProduto = () => {
                             value={name}
                             onChange={(event) => setName(event.target.value)}
                             placeholder="Digite o nome do produto"
+                            maxLength={30}
+                            required
                         />
                     </label>
                 </div>
@@ -64,6 +82,8 @@ const CadastroProduto = () => {
                             value={price}
                             onChange={(event) => setPrice(event.target.value)}
                             placeholder="Digite o preço do produto"
+                            maxLength={10}
+                            required
                         />
                     </label>
                 </div>
@@ -71,7 +91,7 @@ const CadastroProduto = () => {
                 <div className="divisao">
                     <label>
                         Selecione o Cliente:
-                        <select value={clientId} onChange={(event) => setClientId(event.target.value)}>
+                        <select required value={clientId} onChange={(event) => setClientId(event.target.value)}>
                             <option value="">Selecione um cliente</option>
                             {clientes.map(cliente => (
                                 <option key={cliente.clientId} value={cliente.clientId}>

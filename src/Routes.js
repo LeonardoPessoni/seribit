@@ -14,10 +14,13 @@ import EditProduct from "./pages/EditProduct";
 import EditClient from "./pages/EditClient";
 import EditFunc from "./pages/EditFunc";
 import Print from "./pages/Print";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const routes = () => {
   return (
     <Router>
+        <ToastContainer />
         <Routes>
             <Route path="/" element={<Inicial />} />
             

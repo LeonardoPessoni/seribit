@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { clienteAPI } from '../model/Model';
 import EditClientStyle from '../style/EditClientStyle';
 import { Link } from 'react-router-dom/dist';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditFunc = () => {
 
@@ -50,7 +52,6 @@ const EditFunc = () => {
     const cpfRef = useRef(null);
     const emailRef = useRef(null);
     const userRef = useRef(null);
-    const passwordRef = useRef(null);
     const salaryRef = useRef(null);
     const nameRef = useRef(null);
     const dddRef = useRef(null);
@@ -69,7 +70,6 @@ const EditFunc = () => {
                 street: streetRef.current.value,
                 cpfCnpj: cpfRef.current.value,        
                 email: emailRef.current.value,
-                password: passwordRef.current.value,
                 user: userRef.current.value,
                 salary: salaryRef.current.value,
                 name: nameRef.current.value,
@@ -82,6 +82,16 @@ const EditFunc = () => {
             window.location.href = '/usuarios';
         } catch (error) {
             console.log("Deu ruim!", error);
+            toast.error('Erro ao editar. Por favor, tente novamente.', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
         }
     };
 
@@ -100,6 +110,8 @@ const EditFunc = () => {
                             name="name"
                             defaultValue={employee.name}
                             ref={nameRef}
+                            maxLength={50}
+                            required
                         />
                     </label>
                     <label>
@@ -109,6 +121,8 @@ const EditFunc = () => {
                             name="email"
                             defaultValue={employee.email}
                             ref={emailRef}
+                            maxLength={50}
+                            required
                         />
                     </label>     
                 </div>
@@ -121,6 +135,8 @@ const EditFunc = () => {
                             name="cpf"
                             defaultValue={employee.cpf}
                             ref={cpfRef}
+                            maxLength={11}
+                            required
                         />
                     </label>
                     <label>
@@ -130,6 +146,8 @@ const EditFunc = () => {
                             name="salario"
                             defaultValue={employee.salary}
                             ref={salaryRef}
+                            maxLength={20}
+                            required
                         />
                     </label>
                 </div>
@@ -141,37 +159,21 @@ const EditFunc = () => {
                         name="usuario"
                         defaultValue={employee.user}
                         ref={userRef}
+                        maxLength={10}
+                        required
                     />
                 </label>
 
                 <div className='divisao'>
                     <label>
-                        Senha
-                        <input className='input'
-                            type="password"
-                            name="senha"
-                            defaultValue={employee.password}
-                            ref={passwordRef}
-                        />
-                    </label>
-                    <label>
-                        Confirmação de senha
-                        <input className='input'
-                            type="password"
-                            name="confirmenha"
-                            defaultValue={employee.password}
-                        />
-                    </label>
-                </div>
-
-                <div className='divisao'>
-                <label>
                         DDD
                         <input className='input'
                             type="text"
                             name="cpfCnpj"
                             defaultValue={employee.phone.ddd}
                             ref={dddRef}
+                            maxLength={2}
+                            required
                         />
                     </label>
                     <label>
@@ -181,6 +183,8 @@ const EditFunc = () => {
                             name="cpfCnpj"
                             defaultValue={employee.phone.phone}
                             ref={phoneRef}
+                            maxLength={9}
+                            required
                         />
                     </label>
                 </div>
@@ -193,6 +197,8 @@ const EditFunc = () => {
                             name="address"
                             defaultValue={employee.address.cep}
                             ref={cepRef}
+                            maxLength={8}
+                            required
                         />
                     </label>
                     <label>
@@ -202,6 +208,8 @@ const EditFunc = () => {
                             name="address"
                             defaultValue={employee.address.state}
                             ref={stateRef}
+                            maxLength={2}
+                            required
                         />
                     </label>
                 </div>
@@ -214,6 +222,8 @@ const EditFunc = () => {
                             name="address"
                             defaultValue={employee.address.neighborhood}
                             ref={neighborhoodRef}
+                            maxLength={30}
+                            required
                         />
                     </label>
                     <label>
@@ -223,6 +233,8 @@ const EditFunc = () => {
                             name="address"
                             defaultValue={employee.address.street}
                             ref={streetRef}
+                            maxLength={30}
+                            required
                         />
                     </label>
                 </div>
@@ -235,6 +247,8 @@ const EditFunc = () => {
                             name="address"
                             defaultValue={employee.address.number}
                             ref={numberRef}
+                            maxLength={10}
+                            required
                         />
                     </label>
                     <label>

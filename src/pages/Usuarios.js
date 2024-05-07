@@ -41,8 +41,8 @@ const Usuarios = () => {
               <th>Nome</th>
               <th>E-mail</th>
               <th>CPF</th>
-              <th>Excluir</th>
               <th>Editar</th>
+              <th>Excluir</th>
             </tr>
           </thead>
           <tbody>
@@ -54,11 +54,11 @@ const Usuarios = () => {
                   <td>{post.cpf}</td>
 
                   <td className='button-cell'>
-                    <button onClick={() => deleteFuncionario(post.employeeId)}>Excluir</button>
+                    <Link to={`/editFuncionario/${post.employeeId}`}><button>Editar</button></Link>
                   </td>
-                  
+
                   <td className='button-cell'>
-                  <Link to={`/editFuncionario/${post.employeeId}`}><button>Editar</button></Link>
+                    <button onClick={() => deleteFuncionario(post.employeeId)}>Excluir</button>
                   </td>
                 </tr>
               );

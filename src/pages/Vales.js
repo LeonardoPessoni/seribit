@@ -31,8 +31,12 @@ const Vales = () => {
   }
 
   async function deleteVale(id) {
-    await clienteAPI.delete(`/vouchers/${id}`);
-    fetchVales();
+    try {
+      await clienteAPI.delete(`/vouchers/${id}`);
+      fetchVales();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

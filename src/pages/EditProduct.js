@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom/dist";
 import { clienteAPI } from "../model/Model";
 import EditClientStyle from "../style/EditClientStyle";
 import { Link } from 'react-router-dom/dist';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditProduct = () => {
 
@@ -42,7 +44,17 @@ const EditProduct = () => {
             console.log(response.data);
             window.location.href = "/produtos"
         } catch (error) {
-            console.log("Deu Ruim!", error);
+            console.log("Erro ao editar!", error);
+            toast.error('Erro ao editar. Por favor, tente novamente.', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
         }
     };
 
@@ -60,6 +72,8 @@ const EditProduct = () => {
                             name="name"
                             defaultValue={products.name}
                             ref={nameRef}
+                            maxLength={30}
+                            required
                         />
                     </label>
                 </div>
@@ -71,6 +85,8 @@ const EditProduct = () => {
                             name="price"
                             defaultValue={products.price}
                             ref={priceRef}
+                            maxLength={10}
+                            required
                         />
                     </label>
                 </div>

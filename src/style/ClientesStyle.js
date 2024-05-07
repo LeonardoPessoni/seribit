@@ -67,6 +67,7 @@ button {
     text-align: center; 
     vertical-align: middle;
     transition: 360ms;
+    color: black;
 }
 
 .button-cell:hover {

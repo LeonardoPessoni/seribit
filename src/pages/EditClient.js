@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { clienteAPI } from '../model/Model';
 import EditClientStyle from '../style/EditClientStyle';
 import { Link } from 'react-router-dom/dist';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditClient = () => {
     const { id } = useParams();
@@ -71,7 +73,17 @@ const EditClient = () => {
             console.log("Deu bom!", response.data);
             window.location.href = '/clientes';
         } catch (error) {
-            console.log("Deu ruim!", error);
+            console.error('Erro ao editar:', error);
+            toast.error('Erro ao editar. Por favor, tente novamente.', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
         }
     };
 
@@ -88,6 +100,8 @@ const EditClient = () => {
                         name="name"
                         defaultValue={client.name}
                         ref={nameRef}
+                        maxLength={50}
+                        required
                     />
                 </label>
 
@@ -99,6 +113,8 @@ const EditClient = () => {
                             name="email"
                             defaultValue={client.email}
                             ref={emailRef}
+                            maxLength={50}
+                            required
                         />
                     </label>
                     <label>
@@ -108,6 +124,8 @@ const EditClient = () => {
                             name="cpfCnpj"
                             defaultValue={client.cpfCnpj}
                             ref={cpfCnpjRef}
+                            maxLength={14}
+                            required
                         />
                     </label>
                 </div>
@@ -120,6 +138,8 @@ const EditClient = () => {
                             name="cpfCnpj"
                             defaultValue={client.phone.ddd}
                             ref={dddRef}
+                            maxLength={2}
+                            required
                         />
                     </label>
                     <label>
@@ -129,6 +149,8 @@ const EditClient = () => {
                             name="cpfCnpj"
                             defaultValue={client.phone.phone}
                             ref={phoneRef}
+                            maxLength={9}
+                            required
                         />
                     </label>
                 </div>
@@ -141,6 +163,8 @@ const EditClient = () => {
                             name="address"
                             defaultValue={client.address.cep}
                             ref={cepRef}
+                            maxLength={8}
+                            required
                         />
                     </label>
                     <label>
@@ -150,6 +174,8 @@ const EditClient = () => {
                             name="address"
                             defaultValue={client.address.state}
                             ref={stateRef}
+                            maxLength={30}
+                            required
                         />
                     </label>
                 </div>
@@ -162,6 +188,8 @@ const EditClient = () => {
                             name="address"
                             defaultValue={client.address.neighborhood}
                             ref={neighborhoodRef}
+                            maxLength={30}
+                            required
                         />
                     </label>
                     <label>
@@ -171,6 +199,8 @@ const EditClient = () => {
                             name="address"
                             defaultValue={client.address.street}
                             ref={streetRef}
+                            maxLength={30}
+                            required
                         />
                     </label>
                 </div>
@@ -183,6 +213,8 @@ const EditClient = () => {
                             name="address"
                             defaultValue={client.address.number}
                             ref={numberRef}
+                            maxLength={10}
+                            required
                         />
                     </label>
                     <label>
