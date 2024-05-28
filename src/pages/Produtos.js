@@ -4,10 +4,37 @@ import { getProducts, clienteAPI } from "../model/Model";
 import ClientesStyle from '../style/ClientesStyle';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Modal.css';
+
+const Modal = ({ isOpen, onClose, onConfirm }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal">
+                <h2 className='title'>Tem certeza disso?</h2>
+                
+                <div className="modal-buttons">
+                    <button className='buttonModalNo' onClick={onClose}>Não</button>
+                    <button className='buttonModalYes' onClick={onConfirm}>Sim</button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Produtos = () => {
 
     const [products, setProducts] = useState([]);
+    const [openModals, setOpenModals] = useState({});
+
+    const handleOpenModal = (id) => {
+        setOpenModals(prevState => ({ ...prevState, [id]: true }));
+    };
+
+    const handleCloseModal = (id) => {
+        setOpenModals(prevState => ({ ...prevState, [id]: false }));
+    };
 
     useEffect(() => {
         fetchProducts()
@@ -20,8 +47,9 @@ const Produtos = () => {
 
     async function deleteProduto(id) {
         try {
-            await clienteAPI.delete(`/products/${id}`)
-            fetchProducts()
+            await clienteAPI.delete(`/products/${id}`);
+            fetchProducts();
+            handleCloseModal(id);
         } catch (error) {
             toast.error('Não é possível excluir este produto, pois ele está vinculado a vale.', {
                 position: "top-right",
@@ -59,8 +87,7 @@ const Produtos = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product, key) => {
-                        return (
+                        {products.map((product, key) => (
                             <tr key={key}>
                                 <td>{product.name}</td>
                                 <td>R$ {product.price}</td>
@@ -70,11 +97,15 @@ const Produtos = () => {
                                 </td>
 
                                 <td className='button-cell'>
-                                    <button onClick={() => deleteProduto(product.productId)}>Excluir</button>
+                                    <button onClick={() => handleOpenModal(product.productId)}>Excluir</button>
                                 </td>
+                                <Modal 
+                                    isOpen={openModals[product.productId]} 
+                                    onClose={() => handleCloseModal(product.productId)} 
+                                    onConfirm={() => deleteProduto(product.productId)} 
+                                />
                             </tr>
-                        );
-                        })}
+                        ))}
                     </tbody>
                 </table>
             </div>

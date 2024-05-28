@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         list-style: none;
         color: #fff;
-        
     }
 `
 

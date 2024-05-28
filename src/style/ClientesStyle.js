@@ -113,6 +113,7 @@ tr:nth-child(even) {
 p {
     color: white;
 }
+
 `
 
 export default ClientesStyle;

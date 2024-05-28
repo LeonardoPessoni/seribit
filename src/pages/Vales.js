@@ -2,12 +2,39 @@ import React, { useState, useEffect } from "react";
 import ClientesStyle from '../style/ClientesStyle';
 import { Link } from "react-router-dom";
 import { getVales, clienteAPI, getProducts, getClientes } from "../model/Model";
+import './Modal.css';
+
+const Modal = ({ isOpen, onClose, onConfirm }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <h2 className='title'>Tem certeza disso?</h2>
+        
+        <div className="modal-buttons">
+          <button className='buttonModalNo' onClick={onClose}>Não</button>
+          <button className='buttonModalYes' onClick={onConfirm}>Sim</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Vales = () => {
 
   const [vales, setVales] = useState([]);
   const [products, setProducts] = useState([]);
   const [clientes, setClientes] = useState([]);
+  const [openModals, setOpenModals] = useState({});
+
+  const handleOpenModal = (id) => {
+    setOpenModals(prevState => ({ ...prevState, [id]: true }));
+  };
+
+  const handleCloseModal = (id) => {
+    setOpenModals(prevState => ({ ...prevState, [id]: false }));
+  };
 
   useEffect(() => {
     fetchVales();
@@ -36,6 +63,8 @@ const Vales = () => {
       fetchVales();
     } catch (error) {
       console.error(error);
+    } finally {
+      handleCloseModal(id);
     }
   }
 
@@ -77,11 +106,16 @@ const Vales = () => {
                           <td>{vale.quantity}</td>
                           <td>R$ {vale.total}</td>
                           <td className='button-cell'>
-                            <button onClick={() => deleteVale(vale.voucherId)}>Excluir</button>
-                          </td>
-                          <td className='button-cell'>
                             <Link to={`/visualizarVale/${vale.voucherId}`}><button>Visualizar</button></Link>
                           </td>
+                          <td className='button-cell'>
+                            <button onClick={() => handleOpenModal(vale.voucherId)}>Excluir</button>
+                          </td>
+                          <Modal 
+                            isOpen={openModals[vale.voucherId]} 
+                            onClose={() => handleCloseModal(vale.voucherId)} 
+                            onConfirm={() => deleteVale(vale.voucherId)} 
+                          />
                       </tr>
                   );
               })}

@@ -5,9 +5,39 @@ import { getClientes, clienteAPI } from "../model/Model";
 import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Modal.css';
+
+const Modal = ({ isOpen, onClose, onConfirm }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <h2 className='title'>Tem certeza disso?</h2>
+        
+        <div className="modal-buttons">
+          <button className='buttonModalNo' onClick={onClose}>Não</button>
+          <button className='buttonModalYes' onClick={onConfirm}>Sim</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Clientes = () => {
   const [posts, setPosts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentClientId, setCurrentClientId] = useState(null);
+
+  const handleOpenModal = (id) => {
+    setCurrentClientId(id);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setCurrentClientId(null);
+  };
 
   useEffect(() => {
     fetchClientes()
@@ -18,10 +48,11 @@ const Clientes = () => {
     setPosts(clientesAPI);
   }
 
-  async function deleteCliente(id) {
+  async function deleteCliente() {
     try {
-      await clienteAPI.delete(`/clients/${id}`)
+      await clienteAPI.delete(`/clients/${currentClientId}`)
       fetchClientes()
+      setIsModalOpen(false);
     } catch (error) {
       toast.error('Não é possível excluir este cliente, pois ele está vinculado a um produto ou vale.', {
         position: "top-right",
@@ -72,7 +103,7 @@ const Clientes = () => {
                   </td>
 
                   <td className='button-cell'>
-                    <button onClick={() => deleteCliente(post.clientId)}>Excluir</button>
+                    <button onClick={() => handleOpenModal(post.clientId)}>Excluir</button>
                   </td>
                 </tr>
               );
@@ -80,6 +111,11 @@ const Clientes = () => {
           </tbody>
           </table>
         </div>
+        <Modal 
+          isOpen={isModalOpen} 
+          onClose={handleCloseModal} 
+          onConfirm={deleteCliente} 
+        />
     </div>
   )
 }
